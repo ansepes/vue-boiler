@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
+    <p>ApiOrigin: {{ apiOrigin }}</p>
     <HelloWorld msg="Welcome to Your Vue.js App" />
   </div>
 </template>
@@ -13,6 +14,11 @@ export default {
   name: 'Home',
   components: {
     HelloWorld,
+  },
+  computed: {
+    apiOrigin() {
+      return process.env.VUE_APP_API_ORIGIN
+    },
   },
 }
 </script>
