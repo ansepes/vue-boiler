@@ -8,7 +8,8 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+const HelloWorld = () =>
+  import(/* webpackChunkName: "helloWorld" */ '@/components/HelloWorld.vue')
 
 export default {
   name: 'Home',
