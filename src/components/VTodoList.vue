@@ -1,17 +1,18 @@
 <template>
   <div>
     <ul>
-      <li v-for="todo in todos" :key="todo">{{ todo }}</li>
+      <li v-for="item in todos" :key="item.todo">{{ item.todo }}</li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
+import { ITodoItemState } from '@/store/types'
 
 @Component
-export default class TodoListPresent extends Vue {
+export default class VTodoList extends Vue {
   @Prop({ default: [] })
-  todos!: Array<string>
+  todos!: ITodoItemState[]
 }
 </script>

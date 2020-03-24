@@ -7,6 +7,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { todoListModule } from '@/store/modules/todoList'
+
 const VTodoList = () =>
   import(/* webpackChunkName: "vTodoList" */ '@/components/VTodoList.vue')
 

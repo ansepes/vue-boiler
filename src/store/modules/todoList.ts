@@ -8,15 +8,20 @@ import {
 } from 'vuex-module-decorators'
 import store from '@/store'
 
+import { ITodoItemState } from '@/store/types'
+
 export interface ITodoListState {
-  todoList: Array<string>
+  todoList: ITodoItemState[]
 }
 
 @Module({ dynamic: true, store, name: 'todoList', namespaced: true })
 class TodoList extends VuexModule implements ITodoListState {
   // state
-  todoList: Array<string> = ['aaa', 'bbb', 'ccc']
-
+  todoList: ITodoItemState[] = [
+    { todo: 'aaa', isDone: false },
+    { todo: 'bbb', isDone: false },
+    { todo: 'ccc', isDone: false },
+  ]
   // mutation
   //   @Mutation // counter
   //   public SET_INCREMENT_COUNTER(num: number) {
