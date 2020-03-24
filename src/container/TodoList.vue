@@ -1,6 +1,12 @@
 <template>
   <div>
-    <VTodoList :todos="todoList" @clickTodo="invertIsDone" @addTodo="addTodo"></VTodoList>
+    <VTodoList
+      :todos="getTodos"
+      @clickTodo="invertIsDone"
+      @addTodo="addTodo"
+      @delTodo="delTodo"
+      @clearDoneTodo="clearDoneTodo"
+    ></VTodoList>
   </div>
 </template>
 
@@ -16,7 +22,7 @@ const VTodoList = () => import(/* webpackChunkName: "vTodoList" */ '@/components
   },
 })
 export default class TodoList extends Vue {
-  get todoList() {
+  get getTodos() {
     return todoListModule.todos
   }
 
@@ -25,7 +31,17 @@ export default class TodoList extends Vue {
   }
 
   addTodo(value: string) {
+    if (!value) return
+
     todoListModule.addTodo(value)
+  }
+
+  delTodo(index: number) {
+    todoListModule.delTodo(index)
+  }
+
+  clearDoneTodo() {
+    todoListModule.clearDoneTodo()
   }
 }
 </script>

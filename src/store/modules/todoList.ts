@@ -38,6 +38,18 @@ class TodoList extends VuexModule implements ITodoListState {
       isDone: false,
     })
   }
+
+  @Mutation
+  private DEL_TODO(index: number) {
+    this.todos.splice(index, 1)
+  }
+
+  @Mutation
+  private CLEAR_DONE_TODO() {
+    this.todos = this.todos.filter(todo => {
+      return !todo.isDone
+    })
+  }
   //   @Mutation // counter
   //   public SET_INCREMENT_COUNTER(num: number) {
   //     this.incrementCounter = num
@@ -58,6 +70,16 @@ class TodoList extends VuexModule implements ITodoListState {
   public addTodo(newTodo: string) {
     this.ADD_TODO(newTodo)
     // console.log(newTodo)
+  }
+
+  @Action
+  public delTodo(index: number) {
+    this.DEL_TODO(index)
+  }
+
+  @Action
+  public clearDoneTodo() {
+    this.CLEAR_DONE_TODO()
   }
 }
 
