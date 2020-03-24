@@ -1,6 +1,6 @@
 <template>
   <div>
-    <VTodoList :todos="todoList"></VTodoList>
+    <VTodoList :todos="todoList" @clickTodo="invertIsDone" @addTodo="addTodo"></VTodoList>
   </div>
 </template>
 
@@ -8,8 +8,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { todoListModule } from '@/store/modules/todoList'
 
-const VTodoList = () =>
-  import(/* webpackChunkName: "vTodoList" */ '@/components/VTodoList.vue')
+const VTodoList = () => import(/* webpackChunkName: "vTodoList" */ '@/components/VTodoList.vue')
 
 @Component({
   components: {
@@ -18,7 +17,15 @@ const VTodoList = () =>
 })
 export default class TodoList extends Vue {
   get todoList() {
-    return todoListModule.todoList
+    return todoListModule.todos
+  }
+
+  invertIsDone(index: number) {
+    todoListModule.invertIsDone(index)
+  }
+
+  addTodo(value: string) {
+    todoListModule.addTodo(value)
   }
 }
 </script>
