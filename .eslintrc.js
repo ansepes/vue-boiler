@@ -15,12 +15,14 @@ module.exports = {
   parserOptions: {
     parser: '@typescript-eslint/parser',
   },
-  plugins: ['vue', 'prettier'],
+  plugins: ['vue', 'prettier', '@typescript-eslint'],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'generator-star-spacing': 'off',
     'prettier/prettier': 'error',
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
   },
   overrides: [
     {

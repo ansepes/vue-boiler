@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve --mode development",
     "dev": "vue-cli-service serve --mode development",
     "stg": "vue-cli-service serve --mode staging",
-    "prod": "vue-cli-service serve --mode production",    
+    "prod": "vue-cli-service serve --mode production",
     "build": "vue-cli-service build --mode production",
     "build:dev": "vue-cli-service build --mode development",
     "build:stg": "vue-cli-service build --mode staging",
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.19",
-    "@typescript-eslint/eslint-plugin": "^2.24.0",
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
     "@typescript-eslint/parser": "^2.24.0",
     "@vue/cli-plugin-babel": "~4.2.0",
     "@vue/cli-plugin-eslint": "~4.2.0",
