@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { todoListModule } from '@/store/modules/todoList'
+import { todoListModule } from '@/store/modules/todoListStore'
 
 const VTodoList = () => import(/* webpackChunkName: "vTodoList" */ '@/components/VTodoList.vue')
 
