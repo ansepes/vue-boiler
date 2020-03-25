@@ -12,14 +12,12 @@ const routes = [
   {
     path: '/about',
     name: 'About',
-    component: () =>
-      import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
   {
     path: '/todo',
     name: 'Todo',
-    component: () =>
-      import(/* webpackChunkName: "todolist" */ '../views/TodoPage.vue'),
+    component: () => import(/* webpackChunkName: "todolist" */ '../views/TodoPage.vue'),
   },
 ]
 
