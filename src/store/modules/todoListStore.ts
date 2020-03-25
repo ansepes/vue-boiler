@@ -1,6 +1,7 @@
 import { VuexModule, getModule, Module, Mutation, Action } from 'vuex-module-decorators'
 import store from '@/store'
 
+import { TodoListRepo } from '@/api/modules/todoListRepo'
 import { ITodoItemState, ITodoListState } from '@/store/types'
 
 @Module({ dynamic: true, store, name: 'todoList', namespaced: true })
@@ -13,6 +14,11 @@ class TodoListStore extends VuexModule implements ITodoListState {
   }
 
   // mutation
+  @Mutation
+  private SET_TODO_LIST(list: ITodoItemState[]) {
+    this.todos = list
+  }
+
   @Mutation
   private INVERT_IS_DONE(index: number) {
     this.todos[index].isDone = !this.todos[index].isDone
@@ -40,6 +46,13 @@ class TodoListStore extends VuexModule implements ITodoListState {
   }
 
   // action
+  @Action
+  public async fetchTodoList() {
+    const { hasError, response } = await TodoListRepo.getAll()
+    if (hasError) return []
+    this.SET_TODO_LIST(response.data)
+  }
+
   @Action
   public invertIsDone(index: number) {
     this.INVERT_IS_DONE(index)

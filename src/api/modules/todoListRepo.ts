@@ -1,21 +1,32 @@
-import repository from '@/api'
+import { repository } from '@/api'
+import { IApiResponse, repoUtil } from '@/api/repoUtil'
 import { ITodoItemState } from '@/store/types'
 
 const resouce = '/todoList'
 export const TodoListRepo = {
-  getAll: () => {
-    return repository.get(`${resouce}`)
+  getAll: async (): Promise<IApiResponse> => {
+    const response = await repository.get(`${resouce}`)
+
+    return repoUtil.toResult(response)
   },
-  getBy: (id: string) => {
-    return repository.get(`${resouce}/${id}`)
+  getBy: async (id: string): Promise<IApiResponse> => {
+    const response = await repository.get(`${resouce}/${id}`)
+
+    return repoUtil.toResult(response)
   },
-  post: (payload: ITodoItemState) => {
-    return repository.post(`${resouce}`, payload)
+  post: async (payload: ITodoItemState): Promise<IApiResponse> => {
+    const response = await repository.post(`${resouce}`, payload)
+
+    return repoUtil.toResult(response)
   },
-  put: (payload: ITodoItemState) => {
-    return repository.put(`${resouce}/${payload.id}`, payload)
+  put: async (payload: ITodoItemState): Promise<IApiResponse> => {
+    const response = await repository.put(`${resouce}/${payload.id}`, payload)
+
+    return repoUtil.toResult(response)
   },
-  err: () => {
-    return repository.get(`/dummy`)
+  err: async (): Promise<IApiResponse> => {
+    const response = await repository.get(`/dummy`)
+
+    return repoUtil.toResult(response)
   },
 }

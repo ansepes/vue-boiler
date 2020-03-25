@@ -26,6 +26,10 @@ export default class TodoList extends Vue {
     return TodoListModule.getTodos
   }
 
+  created() {
+    TodoListModule.fetchTodoList()
+  }
+
   invertIsDone(index: number) {
     TodoListModule.invertIsDone(index)
   }

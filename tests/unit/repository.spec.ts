@@ -1,5 +1,5 @@
 // import { shallowMount } from '@vue/test-utils'
-import repository from '@/api'
+import { repository } from '@/api'
 
 describe('Repository.ts', () => {
   it('base url', () => {

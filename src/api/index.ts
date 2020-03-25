@@ -1,28 +1,27 @@
 import axios from 'axios'
-const { performance } = require('perf_hooks')
 
-const isDebug = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
+// const isDebug = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
 
-const repository = axios.create({
+const repo = axios.create({
   baseURL: process.env.VUE_APP_API_ORIGIN,
 })
 
-repository.interceptors.request.use(request => {
-  if (isDebug) performance.mark('start')
+repo.interceptors.request.use(request => {
+  //   if (isDebug) performance.mark('start')
   return request
 })
 
-repository.interceptors.response.use(
+repo.interceptors.response.use(
   // 2XX範囲内のステータスコード
   response => {
-    if (isDebug) {
-      performance.mark('finish')
-      performance.measure('request-to-response', 'start', 'finish')
-      //   const message = `${performance.getEntriesByName('request-to-response')[0].duration}`
-      //   console.log(message)
-      // Sentryでログを残すもよし
-      // Sentry.captureMessage(message, Sentry.Severity.Debug);
-    }
+    // if (isDebug) {
+    //   performance.mark('finish')
+    //   performance.measure('request-to-response', 'start', 'finish')
+    //   //   const message = `${performance.getEntriesByName('request-to-response')[0].duration}`
+    //   //   console.log(message)
+    //   // Sentryでログを残すもよし
+    //   // Sentry.captureMessage(message, Sentry.Severity.Debug);
+    // }
 
     return response
   },
@@ -46,4 +45,4 @@ repository.interceptors.response.use(
   }
 )
 
-export default repository
+export const repository = repo

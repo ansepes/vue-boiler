@@ -3,17 +3,17 @@ import { TodoListRepo } from '@/api/modules/todoListRepo'
 
 describe('todoListRepo.ts', () => {
   it('get', async () => {
-    const response = await TodoListRepo.getAll()
+    const result = await TodoListRepo.getAll()
     // console.log(response)
 
-    expect(response.status).toEqual(200)
+    expect(result.response.status).toEqual(200)
   })
 
   it('getBy', async () => {
-    const response = await TodoListRepo.getBy('1')
+    const result = await TodoListRepo.getBy('1')
     // console.log(response)
 
-    expect(response.status).toEqual(200)
+    expect(result.response.status).toEqual(200)
   })
 
   it('post', async () => {
@@ -22,10 +22,10 @@ describe('todoListRepo.ts', () => {
       todo: 'test',
       isDone: false,
     }
-    const response = await TodoListRepo.post(payload)
+    const result = await TodoListRepo.post(payload)
     // console.log(response)
 
-    expect(response.status).toEqual(201)
+    expect(result.response.status).toEqual(201)
   })
 
   it('put', async () => {
@@ -34,16 +34,16 @@ describe('todoListRepo.ts', () => {
       todo: 'test',
       isDone: false,
     }
-    const response = await TodoListRepo.put(payload)
+    const result = await TodoListRepo.put(payload)
     // console.log(response)
 
-    expect(response.status).toEqual(200)
+    expect(result.response.status).toEqual(200)
   })
 
   it('err', async () => {
-    const response = await TodoListRepo.err()
+    const result = await TodoListRepo.err()
     // console.log(response)
 
-    expect(response.status).toEqual(404)
+    expect(result.response.status).toEqual(404)
   })
 })
