@@ -21,10 +21,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { counterModule } from '@/store/modules/counter'
+import { CounterModule } from '@/store/modules/counterStore'
 // @ is an alias to /src
-const HelloWorld = () =>
-  import(/* webpackChunkName: "helloWorld" */ '@/components/HelloWorld.vue')
+const HelloWorld = () => import(/* webpackChunkName: "helloWorld" */ '@/components/HelloWorld.vue')
 
 @Component({
   components: {
@@ -38,31 +37,31 @@ const HelloWorld = () =>
 })
 export default class Home extends Vue {
   get incrementCounter() {
-    return counterModule.incrementCounter
+    return CounterModule.incrementCounter
   }
 
   get decrementCounter() {
-    return counterModule.decrementCounter
+    return CounterModule.decrementCounter
   }
 
   increment() {
-    counterModule.SET_INCREMENT_COUNTER(counterModule.incrementCounter + 1)
+    CounterModule.SET_INCREMENT_COUNTER(CounterModule.incrementCounter + 1)
   }
 
   decrement() {
-    counterModule.SET_DECREMENT_COUNTER(counterModule.decrementCounter - 1)
+    CounterModule.SET_DECREMENT_COUNTER(CounterModule.decrementCounter - 1)
   }
 
   increment100() {
-    counterModule.increment100()
+    CounterModule.increment100()
   }
 
   decrement100() {
-    counterModule.decrement100()
+    CounterModule.decrement100()
   }
 
   resetCounter() {
-    counterModule.resetCounter()
+    CounterModule.resetCounter()
   }
 }
 </script>

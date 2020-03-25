@@ -8,13 +8,10 @@ import {
 } from 'vuex-module-decorators'
 import store from '@/store'
 
-export interface ICounterState {
-  incrementCounter: number
-  decrementCounter: number
-}
+import { ICounterState } from '@/store/types'
 
 @Module({ dynamic: true, store, name: 'counter', namespaced: true })
-class Counter extends VuexModule implements ICounterState {
+class CounterStore extends VuexModule implements ICounterState {
   // state
   incrementCounter: number = 0
   decrementCounter: number = 1000
@@ -48,4 +45,4 @@ class Counter extends VuexModule implements ICounterState {
   }
 }
 
-export const counterModule = getModule(Counter)
+export const CounterModule = getModule(CounterStore)

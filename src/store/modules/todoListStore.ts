@@ -1,11 +1,7 @@
 import { VuexModule, getModule, Module, Mutation, Action } from 'vuex-module-decorators'
 import store from '@/store'
 
-import { ITodoItemState } from '@/store/types'
-
-export interface ITodoListState {
-  todos: ITodoItemState[]
-}
+import { ITodoItemState, ITodoListState } from '@/store/types'
 
 @Module({ dynamic: true, store, name: 'todoList', namespaced: true })
 class TodoListStore extends VuexModule implements ITodoListState {
@@ -15,6 +11,10 @@ class TodoListStore extends VuexModule implements ITodoListState {
     { todo: 'bbb', isDone: false },
     { todo: 'ccc', isDone: false },
   ]
+
+  public get getTodos() {
+    return this.todos
+  }
 
   // mutation
   @Mutation
@@ -64,4 +64,4 @@ class TodoListStore extends VuexModule implements ITodoListState {
   }
 }
 
-export const todoListStore = getModule(TodoListStore)
+export const TodoListModule = getModule(TodoListStore)

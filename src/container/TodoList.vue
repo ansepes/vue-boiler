@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { todoListStore } from '@/store/modules/todoListStore'
+import { TodoListModule } from '@/store/modules/todoListStore'
 
 const VTodoList = () => import(/* webpackChunkName: "vTodoList" */ '@/components/VTodoList.vue')
 
@@ -23,25 +23,25 @@ const VTodoList = () => import(/* webpackChunkName: "vTodoList" */ '@/components
 })
 export default class TodoList extends Vue {
   get getTodos() {
-    return todoListStore.todos
+    return TodoListModule.getTodos
   }
 
   invertIsDone(index: number) {
-    todoListStore.invertIsDone(index)
+    TodoListModule.invertIsDone(index)
   }
 
   addTodo(value: string) {
     if (!value) return
 
-    todoListStore.addTodo(value)
+    TodoListModule.addTodo(value)
   }
 
   delTodo(index: number) {
-    todoListStore.delTodo(index)
+    TodoListModule.delTodo(index)
   }
 
   clearDoneTodo() {
-    todoListStore.clearDoneTodo()
+    TodoListModule.clearDoneTodo()
   }
 }
 </script>
