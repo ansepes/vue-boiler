@@ -1,13 +1,4 @@
-import {
-  //   Mutation,
-  //   MutationAction,
-  //   Action,
-  VuexModule,
-  getModule,
-  Module,
-  Mutation,
-  Action,
-} from 'vuex-module-decorators'
+import { VuexModule, getModule, Module, Mutation, Action } from 'vuex-module-decorators'
 import store from '@/store'
 
 import { ITodoItemState } from '@/store/types'
@@ -50,15 +41,6 @@ class TodoListStore extends VuexModule implements ITodoListState {
       return !todo.isDone
     })
   }
-  //   @Mutation // counter
-  //   public SET_INCREMENT_COUNTER(num: number) {
-  //     this.incrementCounter = num
-  //   }
-
-  //   @Mutation
-  //   public SET_DECREMENT_COUNTER(num: number) {
-  //     this.decrementCounter = num
-  //   }
 
   // action
   @Action
@@ -69,7 +51,6 @@ class TodoListStore extends VuexModule implements ITodoListState {
   @Action
   public addTodo(newTodo: string) {
     this.ADD_TODO(newTodo)
-    // console.log(newTodo)
   }
 
   @Action
@@ -83,4 +64,4 @@ class TodoListStore extends VuexModule implements ITodoListState {
   }
 }
 
-export const todoListModule = getModule(TodoListStore)
+export const todoListStore = getModule(TodoListStore)
