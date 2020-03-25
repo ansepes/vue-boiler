@@ -6,11 +6,7 @@ import { ITodoItemState, ITodoListState } from '@/store/types'
 @Module({ dynamic: true, store, name: 'todoList', namespaced: true })
 class TodoListStore extends VuexModule implements ITodoListState {
   // state
-  todos: ITodoItemState[] = [
-    { todo: 'aaa', isDone: false },
-    { todo: 'bbb', isDone: false },
-    { todo: 'ccc', isDone: false },
-  ]
+  todos: ITodoItemState[] = []
 
   public get getTodos() {
     return this.todos
@@ -25,6 +21,7 @@ class TodoListStore extends VuexModule implements ITodoListState {
   @Mutation
   private ADD_TODO(newTodo: string) {
     this.todos.push({
+      id: '100',
       todo: newTodo,
       isDone: false,
     })

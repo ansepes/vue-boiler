@@ -9,6 +9,7 @@ export interface ITodoListState {
 }
 
 export interface ITodoItemState {
+  id: string
   todo: string
   isDone: boolean
 }
