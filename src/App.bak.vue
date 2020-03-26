@@ -20,12 +20,7 @@
           width="100"
         />
       </div>
-      <v-spacer />
-      <v-toolbar-title class="headline">
-        <router-link to="/" style="color: white">Home</router-link> |
-        <router-link to="/about" style="color: white">About</router-link> |
-        <router-link to="/todo" style="color: white">Todo</router-link>
-      </v-toolbar-title>
+
       <v-spacer></v-spacer>
 
       <v-btn href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank" text>
@@ -33,23 +28,26 @@
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
-
+    <div id="nav">
+      <router-link to="/">Home</router-link>|
+      <router-link to="/todo">Todo</router-link>
+    </div>
     <v-content>
-      <router-view />
+      <HelloWorld />
     </v-content>
   </v-app>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-// import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from './components/HelloWorld.vue'
 
 export default Vue.extend({
   name: 'App',
 
-  //   components: {
-  //     HelloWorld,
-  //   },
+  components: {
+    HelloWorld,
+  },
 
   data: () => ({
     //

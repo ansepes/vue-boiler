@@ -1,22 +1,25 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <p>ApiOrigin: {{ apiOrigin }}</p>
-    <div>
-      <button @click="increment100">increment 100!</button>
-      <button @click="increment">increment 1</button>
-    </div>
-    increment counter: {{ incrementCounter }}
-    <div>
-      <button @click="decrement100">decrement 100!</button>
-      <button @click="decrement">decrement 1</button>
-    </div>
-    decrement counter: {{ decrementCounter }}
-    <div>
-      <button @click="resetCounter">reset counter</button>
-    </div>
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <v-container>
+    <v-row class="text-center">
+      <div class="home">
+        <p>ApiOrigin: {{ apiOrigin }}</p>
+        <div>
+          <button @click="increment100">increment 100!</button>
+          <button @click="increment">increment 1</button>
+        </div>
+        increment counter: {{ incrementCounter }}
+        <div>
+          <button @click="decrement100">decrement 100!</button>
+          <button @click="decrement">decrement 1</button>
+        </div>
+        decrement counter: {{ decrementCounter }}
+        <div>
+          <button @click="resetCounter">reset counter</button>
+        </div>
+        <HelloWorld />
+      </div>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">

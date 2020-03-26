@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <TodoList></TodoList>
-  </div>
+  <v-container>
+    <v-row class="text-center">
+      <TodoList></TodoList>
+    </v-row>
+  </v-container>
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
