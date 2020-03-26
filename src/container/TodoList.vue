@@ -34,10 +34,10 @@ export default class TodoList extends Vue {
     TodoListModule.invertIsDone(index)
   }
 
-  addTodo(value: string) {
+  async addTodo(value: string) {
     if (!value) return
 
-    TodoListModule.addTodo(value)
+    await TodoListModule.addTodo(value)
   }
 
   delTodo(index: number) {

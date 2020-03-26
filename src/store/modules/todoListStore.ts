@@ -4,7 +4,7 @@ import store from '@/store'
 import { TodoListRepo } from '@/api/modules/todoListRepo'
 import { ITodoItemState, ITodoListState } from '@/store/types'
 
-@Module({ dynamic: true, store, name: 'todoList', namespaced: true })
+@Module({ dynamic: true, store, name: 'todoListStr', namespaced: true })
 class TodoListStore extends VuexModule implements ITodoListState {
   // state
   todos: ITodoItemState[] = []
@@ -25,12 +25,8 @@ class TodoListStore extends VuexModule implements ITodoListState {
   }
 
   @Mutation
-  private ADD_TODO(newTodo: string) {
-    this.todos.push({
-      id: '100',
-      todo: newTodo,
-      isDone: false,
-    })
+  private ADD_TODO(newItem: ITodoItemState) {
+    this.todos.push(newItem)
   }
 
   @Mutation
@@ -48,9 +44,9 @@ class TodoListStore extends VuexModule implements ITodoListState {
   // action
   @Action
   public async fetchTodoList() {
-    const { hasError, response } = await TodoListRepo.getAll()
-    if (hasError) return []
-    this.SET_TODO_LIST(response.data)
+    const { hasError, data } = await TodoListRepo.getAll()
+    if (hasError) return
+    this.SET_TODO_LIST(data)
   }
 
   @Action
@@ -59,8 +55,23 @@ class TodoListStore extends VuexModule implements ITodoListState {
   }
 
   @Action
-  public addTodo(newTodo: string) {
-    this.ADD_TODO(newTodo)
+  public async addTodo(newTodo: string) {
+    const newItem: ITodoItemState = {
+      //   id: this.createNewId(),
+      id: '12',
+      todo: newTodo,
+      isDone: false,
+    }
+
+    const { hasError } = await TodoListRepo.post(newItem)
+    if (hasError) return
+
+    this.ADD_TODO(newItem)
+  }
+
+  private createNewId(): string {
+    const ids = this.todos.map(todo => Number.parseInt(todo.id))
+    return `${Math.max.apply(null, ids) + 1}`
   }
 
   @Action

@@ -1,5 +1,7 @@
 export interface IApiResponse {
   hasError: boolean
+  data: any
+  status: number
   response: any
 }
 
@@ -11,6 +13,8 @@ class RepoUtil {
   public toResult(response: any): IApiResponse {
     return {
       hasError: !this.isSuccess(response.status),
+      data: response.data || {},
+      status: response.status || -1,
       response,
     }
   }

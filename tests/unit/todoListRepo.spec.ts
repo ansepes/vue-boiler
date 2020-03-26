@@ -6,14 +6,14 @@ describe('todoListRepo.ts', () => {
     const result = await TodoListRepo.getAll()
     // console.log(response)
 
-    expect(result.response.status).toEqual(200)
+    expect(result.status).toEqual(200)
   })
 
   it('getBy', async () => {
     const result = await TodoListRepo.getBy('1')
     // console.log(response)
 
-    expect(result.response.status).toEqual(200)
+    expect(result.status).toEqual(200)
   })
 
   it('post', async () => {
@@ -25,7 +25,7 @@ describe('todoListRepo.ts', () => {
     const result = await TodoListRepo.post(payload)
     // console.log(response)
 
-    expect(result.response.status).toEqual(201)
+    expect(result.status).toEqual(201)
   })
 
   it('put', async () => {
@@ -37,13 +37,13 @@ describe('todoListRepo.ts', () => {
     const result = await TodoListRepo.put(payload)
     // console.log(response)
 
-    expect(result.response.status).toEqual(200)
+    expect(result.status).toEqual(200)
   })
 
   it('err', async () => {
     const result = await TodoListRepo.err()
     // console.log(response)
 
-    expect(result.response.status).toEqual(404)
+    expect(result.status).toEqual(404)
   })
 })
