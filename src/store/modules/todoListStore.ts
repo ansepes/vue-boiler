@@ -9,8 +9,14 @@ class TodoListStore extends VuexModule implements ITodoListState {
   // state
   todos: ITodoItemState[] = []
 
+  newTodo: string = ''
+
   public get getTodos() {
     return this.todos
+  }
+
+  public get getNewTodo() {
+    return this.newTodo
   }
 
   // mutation
@@ -41,6 +47,11 @@ class TodoListStore extends VuexModule implements ITodoListState {
     })
   }
 
+  @Mutation
+  private SET_NEW_TODO(value: string) {
+    this.newTodo = value
+  }
+
   // action
   @Action
   public async fetchTodoList() {
@@ -69,11 +80,6 @@ class TodoListStore extends VuexModule implements ITodoListState {
     this.ADD_TODO(newItem)
   }
 
-  private createNewId(): string {
-    const ids = this.todos.map(todo => Number.parseInt(todo.id))
-    return `${Math.max.apply(null, ids) + 1}`
-  }
-
   @Action
   public delTodo(index: number) {
     this.DEL_TODO(index)
@@ -82,6 +88,11 @@ class TodoListStore extends VuexModule implements ITodoListState {
   @Action
   public clearDoneTodo() {
     this.CLEAR_DONE_TODO()
+  }
+
+  @Action
+  public setNewTodo(newTodo: string) {
+    this.SET_NEW_TODO(newTodo)
   }
 }
 

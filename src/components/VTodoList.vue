@@ -4,7 +4,7 @@
       <v-text-field
         label="input todo"
         :value="newTodo"
-        @input="value => (newTodo = value)"
+        @input="value => handleInputNewTodo(value)"
       ></v-text-field>
       <div style="padding-left:10px; padding-top: 10px">
         <v-btn small color="primary" @click="handleAddTodo">add</v-btn>
@@ -38,8 +38,6 @@ import { ITodoItemState } from '@/store/types'
 // @input="newTodo = $event.target.value"
 @Component
 export default class VTodoList extends Vue {
-  newTodo: string = ''
-
   test(e: any) {
     console.log(e)
   }
@@ -48,17 +46,24 @@ export default class VTodoList extends Vue {
   @Prop({ default: [] })
   todos!: ITodoItemState[]
 
+  @Prop({ default: '' })
+  newTodo!: string
+
   // emits
   @Emit('clickTodo')
   handleClickTodo(index: number) {
     return index
   }
 
+  @Emit('inputNewTodo')
+  handleInputNewTodo(value: string) {
+    return value
+  }
+
   @Emit('addTodo')
   handleAddTodo() {
-    const txt = this.newTodo
-    this.newTodo = ''
-    return txt
+    // const txt = this.newTodo
+    return this.newTodo
   }
 
   @Emit('delTodo')

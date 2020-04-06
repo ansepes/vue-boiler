@@ -1,5 +1,7 @@
 <template>
   <v-app>
+    <Modal></Modal>
+    <Loading></Loading>
     <v-app-bar app color="primary" dark>
       <div class="d-flex align-center">
         <v-img
@@ -21,38 +23,50 @@
         />
       </div>
       <v-spacer />
-      <v-toolbar-title class="headline">
-        <router-link to="/" style="color: white">Home</router-link> |
-        <router-link to="/about" style="color: white">About</router-link> |
-        <router-link to="/todo" style="color: white">Todo</router-link>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-
-      <v-btn href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank" text>
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      <v-toolbar-items>
+        <v-btn text to="/">Home</v-btn>
+        <v-btn text to="/about">About</v-btn>
+        <v-btn text to="/todo">Todo</v-btn>
+      </v-toolbar-items>
     </v-app-bar>
 
     <v-content>
       <router-view />
     </v-content>
+    <v-content>
+      <v-footer color="primary" dark absolute>
+        <v-col class="text-center caption"
+          ><span>Copyright (C) xxxxx Corporation Inc. All Right Reserved.</span></v-col
+        >
+      </v-footer>
+    </v-content>
   </v-app>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { Component, Vue } from 'vue-property-decorator'
 // import HelloWorld from './components/HelloWorld.vue'
+import Modal from '@/basic/components/Modal.vue'
+import Loading from '@/basic/components/Loading.vue'
+import { LoadingModule } from '@/store/modules/loadingStore'
 
-export default Vue.extend({
-  name: 'App',
-
-  //   components: {
-  //     HelloWorld,
-  //   },
-
-  data: () => ({
-    //
-  }),
+@Component({
+  components: {
+    Loading,
+    Modal,
+  },
 })
+export default class App extends Vue {
+  // getter
+  get loading() {
+    return LoadingModule.getLoading
+  }
+
+  // methods
+  toHome() {
+    if (this.$router.currentRoute.path !== '/') {
+      this.$router.push('/')
+    }
+  }
+}
 </script>
