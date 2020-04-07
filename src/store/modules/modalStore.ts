@@ -3,7 +3,7 @@ import PromiseUtil from '@/basic/utils/promiseUtil'
 import store from '@/store'
 
 // import types
-import { IModalState, IModalViewState } from '@/store/types'
+import { IModalState, IModalViewState, ModalCloseButtonTypes } from '@/store/types'
 
 const createInitState = () => {
   return {
@@ -32,39 +32,38 @@ class ModalStore extends VuexModule implements IModalState {
   }
 
   @Mutation
-  SET_INFO({ isShow, title, message, okBtnDifferd }: IModalViewState) {
+  SET_INFO({ isShow, title, message, onClose }: IModalViewState) {
     this.info.isShow = isShow
     this.info.title = title
     this.info.message = message
-    this.info.okBtnDifferd = okBtnDifferd
+    this.info.onClose = onClose
   }
 
   @Mutation
-  SET_WARN({ isShow, title, message, okBtnDifferd }: IModalViewState) {
+  SET_WARN({ isShow, title, message, onClose }: IModalViewState) {
     this.warn.isShow = isShow
     this.warn.title = title
     this.warn.message = message
-    this.warn.okBtnDifferd = okBtnDifferd
+    this.warn.onClose = onClose
   }
 
   @Mutation
-  SET_CONFIRM({ isShow, title, message, okBtnDifferd, canselBtnDifferd }: IModalViewState) {
+  SET_CONFIRM({ isShow, title, message, onClose }: IModalViewState) {
     this.confirm.isShow = isShow
     this.confirm.title = title
     this.confirm.message = message
-    this.confirm.okBtnDifferd = okBtnDifferd
-    this.confirm.canselBtnDifferd = canselBtnDifferd
+    this.confirm.onClose = onClose
   }
 
   @Action({})
   openInfoModal({ title = 'Infomation', message }: { title?: string; message: string }) {
-    const { promise, resolve, reject } = PromiseUtil.createDifferd()
+    const { promise, resolve, reject } = PromiseUtil.createDifferd<ModalCloseButtonTypes>()
 
     this.SET_INFO({
       isShow: true,
       title,
       message,
-      okBtnDifferd: { resolve, reject },
+      onClose: { resolve, reject },
     })
 
     return promise
@@ -72,7 +71,7 @@ class ModalStore extends VuexModule implements IModalState {
 
   @Action
   closeInfoModal() {
-    const { resolve } = this.info.okBtnDifferd || {}
+    const { resolve } = this.info.onClose || {}
 
     this.SET_INFO({
       isShow: false,
@@ -80,19 +79,19 @@ class ModalStore extends VuexModule implements IModalState {
       message: '',
     })
 
-    if (resolve) resolve()
+    if (resolve) resolve(ModalCloseButtonTypes.OK)
   }
 
   @Action({})
   openWarnModal({ title = 'Error', message }: { title?: string; message: string }) {
     // const title = ttl || 'Error'
-    const { promise, resolve, reject } = PromiseUtil.createDifferd()
+    const { promise, resolve, reject } = PromiseUtil.createDifferd<ModalCloseButtonTypes>()
 
     this.SET_WARN({
       isShow: true,
       title,
       message,
-      okBtnDifferd: { resolve, reject },
+      onClose: { resolve, reject },
     })
 
     return promise
@@ -100,7 +99,7 @@ class ModalStore extends VuexModule implements IModalState {
 
   @Action
   closeWarnModal() {
-    const { resolve } = this.warn.okBtnDifferd || {}
+    const { resolve } = this.warn.onClose || {}
 
     this.SET_WARN({
       isShow: false,
@@ -108,31 +107,26 @@ class ModalStore extends VuexModule implements IModalState {
       message: '',
     })
 
-    if (resolve) resolve()
+    if (resolve) resolve(ModalCloseButtonTypes.Close)
   }
 
   @Action({})
   openConfirmModal({ title = 'Confirm', message }: { title?: string; message: string }) {
-    const okPromise = PromiseUtil.createDifferd()
-    const cancelPromise = PromiseUtil.createDifferd()
+    const { promise, resolve, reject } = PromiseUtil.createDifferd<ModalCloseButtonTypes>()
 
     this.SET_CONFIRM({
       isShow: true,
       title,
       message,
-      okBtnDifferd: { resolve: okPromise.resolve, reject: okPromise.reject },
-      canselBtnDifferd: { resolve: cancelPromise.resolve, reject: cancelPromise.reject },
+      onClose: { resolve, reject },
     })
 
-    return {
-      okPromise: okPromise.promise,
-      cancelPromise: cancelPromise.promise,
-    }
+    return promise
   }
 
   @Action
   closeConfirmOK() {
-    const { resolve } = this.confirm.okBtnDifferd || {}
+    const { resolve } = this.confirm.onClose || {}
 
     this.SET_CONFIRM({
       isShow: false,
@@ -140,12 +134,12 @@ class ModalStore extends VuexModule implements IModalState {
       message: '',
     })
 
-    if (resolve) resolve()
+    if (resolve) resolve(ModalCloseButtonTypes.OK)
   }
 
   @Action
   closeConfirmCancel() {
-    const { resolve } = this.confirm.canselBtnDifferd || {}
+    const { resolve } = this.confirm.onClose || {}
 
     this.SET_CONFIRM({
       isShow: false,
@@ -153,7 +147,7 @@ class ModalStore extends VuexModule implements IModalState {
       message: '',
     })
 
-    if (resolve) resolve()
+    if (resolve) resolve(ModalCloseButtonTypes.Cancel)
   }
 }
 

@@ -16,6 +16,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { TodoListModule } from '@/store/modules/todoListStore'
 import { ModalModule } from '@/store/modules/modalStore'
+import { ModalCloseButtonTypes } from '@/store/types'
 
 const VTodoList = () => import(/* webpackChunkName: "vTodoList" */ '@/components/VTodoList.vue')
 
@@ -48,18 +49,19 @@ export default class TodoList extends Vue {
   async addTodo(value: string) {
     if (!value) return
 
-    const promises = await ModalModule.openConfirmModal({ message: '登録を実行しますか' })
+    const modalCloseButton: ModalCloseButtonTypes = await ModalModule.openConfirmModal({
+      message: '登録を実行しますか',
+    })
 
-    promises.okPromise
-      .then(async () => {
-        await TodoListModule.addTodo(value)
-        TodoListModule.setNewTodo('')
-        await ModalModule.openInfoModal({ title: '登録完了', message: '登録が完了しました。' })
-        console.log('added')
+    if (modalCloseButton === ModalCloseButtonTypes.OK) {
+      await TodoListModule.addTodo(value)
+      TodoListModule.setNewTodo('')
+      const result = await ModalModule.openInfoModal({
+        title: '登録完了',
+        message: '登録が完了しました。',
       })
-      .catch(e => {
-        throw new Error(e)
-      })
+      console.log(`added: ${result}`)
+    }
   }
 
   delTodo(index: number) {

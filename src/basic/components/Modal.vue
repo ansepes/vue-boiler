@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import { ModalModule } from '@/store/modules/modalStore'
 
 @Component
@@ -75,6 +75,11 @@ export default class Modal extends Vue {
 
   closeConfirmModalCancel() {
     ModalModule.closeConfirmCancel()
+  }
+
+  @Watch('infoState')
+  onChangeInfoState(to) {
+    console.log(to)
   }
 }
 </script>

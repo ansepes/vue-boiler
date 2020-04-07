@@ -1,9 +1,9 @@
 export default class PromiseUtillity {
-  public static createDifferd() {
-    let _resolve: Function = () => {}
-    let _reject: Function = () => {}
+  public static createDifferd<T>() {
+    let _resolve: () => T | void = () => {}
+    let _reject: () => T | void = () => {}
 
-    const promise = new Promise((resolve, reject) => {
+    const promise = new Promise<T>((resolve, reject) => {
       _resolve = resolve
       _reject = reject
     })

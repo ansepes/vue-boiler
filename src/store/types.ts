@@ -19,13 +19,18 @@ export interface IModalViewState {
   isShow: boolean
   title: string
   message: string
-  okBtnDifferd?: IModalDifferdState
-  canselBtnDifferd?: IModalDifferdState
+  onClose?: IModalDifferdState
 }
 
 export interface IModalDifferdState {
   resolve?: Function
   reject?: Function
+}
+
+export enum ModalCloseButtonTypes {
+  Close,
+  OK,
+  Cancel,
 }
 
 // TodoList
